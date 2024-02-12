@@ -2,8 +2,8 @@
 
 #################### main.py ##############################
 
-user_tc_no = "47779165646"
-user_pass = "742011duygu"
+user_tc_no = ""
+user_pass = ""
 
 error_message = "Hatası Oluştu..."
 
