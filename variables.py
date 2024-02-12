@@ -2,8 +2,8 @@
 
 #################### main.py ##############################
 
-user_tc_no = ""
-user_pass = ""
+user_tc_no = "47779165646"
+user_pass = "742011duygu"
 
 error_message = "Hatası Oluştu..."
 
@@ -15,9 +15,11 @@ main_file_print1 = "İşlem Sonuçlandı..."
 
 url = "https://ptt.etebligat.gov.tr/login"
 e_devlet_button = "//a[contains(text(), ' e-Devlet' )]"
-tc_no = "tridField"
-e_devlet_pass = "egpField"
-enter_button = "submitButton"
+tc_no = "mat-input-0"
+e_devlet_pass = "mat-input-1"
+enter_button = "button[class='btn btn-accent m-btn m-btn--custom m-btn--icon m-btn--air']"
+guvenlik_giris = "//*[@id='m_login']/div[2]/div[2]/m-sms-code/div/form/div/div[2]/input"
+guvenlik_button = "button[class='btn btn-brand']"
 compant_button = "button[class='btn btn-accent btn-sm m-btn--custom m-btn--icon m-btn--air']"
 notifications = "//span[contains(text(), 'Tebligatlarım')]"
 link_button = "button[class='btn btn-grey btn-sm text-uppercase dropdown-toggle edit-toggle']"

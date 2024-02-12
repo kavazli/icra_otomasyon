@@ -15,21 +15,29 @@ def browser_enter():
         browser = webdriver.Chrome(options=chrome_options) # options=chrome_options
         browser.get(vb.url)
         browser.maximize_window()
-        WebDriverWait(browser, 6).until(EC.visibility_of_element_located((By.XPATH, vb.e_devlet_button)))
-        browser.find_element(By.XPATH, vb.e_devlet_button).click()
+        # WebDriverWait(browser, 6).until(EC.visibility_of_element_located((By.XPATH, vb.e_devlet_button)))
+        # browser.find_element(By.XPATH, vb.e_devlet_button).click()
         return browser
     except Exception as e:
         print(f"{e}", vb.error_message)
 
-def e_devlet_enter(link):
+def sistem_enter(link):
 
     try:
         WebDriverWait(link, 6).until(EC.visibility_of_element_located((By.ID, vb.tc_no)))
         link.find_element(By.ID, vb.tc_no).send_keys(vb.user_tc_no)
         WebDriverWait(link, 6).until(EC.visibility_of_element_located((By.ID, vb.e_devlet_pass)))
         link.find_element(By.ID, vb.e_devlet_pass).send_keys(vb.user_pass)
-        WebDriverWait(link, 6).until(EC.visibility_of_element_located((By.NAME, vb.enter_button)))
-        link.find_element(By.NAME, vb.enter_button).click()
+        WebDriverWait(link, 6).until(EC.visibility_of_element_located((By.CSS_SELECTOR, vb.enter_button)))
+        link.find_element(By.CSS_SELECTOR, vb.enter_button).click()
+        kod = input("Lütfen Güvenlik Kodunu Giriniz...: ")
+        WebDriverWait(link, 6).until(EC.visibility_of_element_located((By.XPATH, vb.guvenlik_giris)))
+        link.find_element(By.XPATH, vb.guvenlik_giris).send_keys(kod)
+        WebDriverWait(link, 6).until(EC.visibility_of_element_located((By.CSS_SELECTOR, vb.guvenlik_button)))
+        link.find_element(By.CSS_SELECTOR, vb.guvenlik_button).click()
+
+
+
         return link
     except Exception as a:
         print(f"{a}", vb.error_message)
@@ -38,7 +46,7 @@ def e_devlet_enter(link):
 def company_enter(link, sayı):
     try:
         WebDriverWait(link, 6).until(EC.visibility_of_element_located((By.CSS_SELECTOR, vb.compant_button)))
-        link.find_elements(By.CSS_SELECTOR, vb.compant_button)[sayı].click()
+        link.find_elements(By.CSS_SELECTOR, vb.compant_button)[int(sayı)].click()
         WebDriverWait(link, 6).until(EC.visibility_of_element_located((By.XPATH, vb.notifications)))
         link.find_element(By.XPATH, vb.notifications).click()
         time.sleep(2)
@@ -78,15 +86,16 @@ def notifications_down(link):
 
 def main_file():
 
-    for i in range(1, 6):
-        try:
-            link = browser_enter()
-            e_devlet_enter(link)
-            company_enter(link, i)
-            notifications_down(link)
-            print(f"{vb.main_file_print1}{i}")
-        except Exception as l:
-            print(f"{l}", vb.error_message)
+
+    try:
+        link = browser_enter()
+        sistem_enter(link)
+        firma_kodu = input("Lütfen Firma kodunu giriniz...:")
+        company_enter(link, firma_kodu)
+        notifications_down(link)
+        print(f"{vb.main_file_print1}{firma_kodu}")
+    except Exception as l:
+        print(f"{l}", vb.error_message)
 
 
 
